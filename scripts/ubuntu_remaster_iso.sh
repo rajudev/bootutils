@@ -1,7 +1,6 @@
 #!/bin/bash
 # Ubuntu-specific script
 
-
 PROG_PATH=${PROG_PATH:-$(readlink -e $0)}
 PROG_DIR=$(dirname ${PROG_PATH})
 PROG_NAME=$(basename ${PROG_PATH})
@@ -11,9 +10,9 @@ PROG_NAME=$(basename ${PROG_PATH})
 # Needs root privileges (to mount)
 exit_if_not_root
 
-SQUASHFS_PATH=casper/filesystem.squashfs
-MANIFEST_PATH=casper/filesystem.manifest
-SIZE_FILE=casper/filesystem.size
+SQUASHFS_PATH=live/filesystem.squashfs
+#MANIFEST_PATH=casper/filesystem.manifest
+SIZE_FILE=live/filesystem.size
 EFI_IMG_FILE=boot/grub/efi.img
 
 # Check cmdline args
@@ -54,6 +53,6 @@ else
     echo "No REMASTER_CMDS_DIR. Not running any remaster commands"
 fi
 
-update_squashfs "$EXTRACT_DIR" "$SQUASHFS_PATH" "${MANIFEST_PATH}" "${SIZE_FILE}"
+update_squashfs "$EXTRACT_DIR" "$SQUASHFS_PATH" "${SIZE_FILE}"
 update_iso "$EXTRACT_DIR" "${OUTPUT_ISO}" "$ISO_PATH" "$EFI_IMG_FILE" 
 rmdir "$EXTRACT_DIR"
